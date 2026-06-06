@@ -12,6 +12,7 @@ import Menu from "@/pages/menu";
 import Cart from "@/pages/cart";
 import Orders from "@/pages/orders";
 import OrderConfirmation from "@/pages/order-confirmation";
+import Contact from "@/pages/contact";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ function Router() {
           <Route path="/cart" component={Cart} />
           <Route path="/orders" component={Orders} />
           <Route path="/order-confirmation/:id" component={OrderConfirmation} />
+          <Route path="/contact" component={Contact} />
           <Route component={NotFound} />
         </Switch>
       </main>

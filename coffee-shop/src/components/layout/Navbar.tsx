@@ -25,6 +25,9 @@ export function Navbar() {
           <Link href="/orders" className="text-sm font-medium hover:text-accent transition-colors">
             Order History
           </Link>
+          <Link href="/contact" className="text-sm font-medium hover:text-accent transition-colors">
+            Contact
+          </Link>
           <Link href="/cart" className="relative text-sm font-medium hover:text-accent transition-colors flex items-center gap-2">
             <ShoppingBag className="h-5 w-5" />
             <span className="hidden lg:inline">Cart</span>
@@ -58,6 +61,7 @@ export function Navbar() {
                 <Link href="/" className="text-xl font-serif font-bold text-foreground">Home</Link>
                 <Link href="/menu" className="text-xl font-serif font-bold text-foreground">Our Menu</Link>
                 <Link href="/orders" className="text-xl font-serif font-bold text-foreground">Order History</Link>
+                <Link href="/contact" className="text-xl font-serif font-bold text-foreground">Contact</Link>
                 <Link href="/cart" className="text-xl font-serif font-bold text-foreground">Cart ({itemCount})</Link>
               </div>
             </SheetContent>

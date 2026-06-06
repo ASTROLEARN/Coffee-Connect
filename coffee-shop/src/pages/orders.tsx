@@ -97,7 +97,7 @@ export default function Orders() {
                     <div className="flex items-center justify-between">
                       <div className="font-sans">
                         <span className="text-muted-foreground text-sm">Total paid  </span>
-                        <span className="font-serif text-xl font-bold text-foreground">₹{grandTotal.toFixed(0)}</span>
+                        <span className="font-serif text-xl font-bold text-foreground"><span className="font-sans">₹</span>{grandTotal.toFixed(0)}</span>
                       </div>
                       <Button variant="ghost" size="sm" className="group-hover:text-primary font-sans">
                         View details
