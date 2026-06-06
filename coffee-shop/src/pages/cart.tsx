@@ -221,7 +221,7 @@ export default function Cart() {
                   <Separator className="my-2" />
                   <div className="flex justify-between text-xl font-bold text-foreground font-serif">
                     <span>Total</span>
-                    <span>₹{grandTotal.toFixed(0)}</span>
+                    <span><span className="font-sans">₹</span>{grandTotal.toFixed(0)}</span>
                   </div>
                 </div>
 
