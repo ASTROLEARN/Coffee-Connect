@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-border: hsl(var(--card-border));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-popover-border: hsl(var(--popover-border));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary-border: var(--primary-border);
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-secondary-border: var(--secondary-border);
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-muted-border: var(--muted-border);
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-accent-border: var(--accent-border);
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-destructive-border: var(--destructive-border);
+
+  --font-sans: 'DM Sans', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: 40 20% 97%; /* #FAF9F6 Creamy off-white */
+  --foreground: 18 46% 12%; /* #2C1810 Deep espresso */
+  
+  --card: 40 20% 99%;
+  --card-foreground: 18 46% 12%;
+  --card-border: 33 22% 88%;
+  
+  --popover: 40 20% 99%;
+  --popover-foreground: 18 46% 12%;
+  --popover-border: 33 22% 88%;
+  
+  --primary: 20 39% 21%; /* #4A2E20 Roast brown */
+  --primary-foreground: 40 20% 97%;
+  
+  --secondary: 33 22% 88%; /* #E6DFD3 Warm taupe */
+  --secondary-foreground: 18 46% 12%;
+  
+  --muted: 33 22% 88%;
+  --muted-foreground: 18 20% 40%;
+  
+  --accent: 43 65% 53%; /* #D4AF37 Golden amber */
+  --accent-foreground: 18 46% 12%;
+  
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 33 22% 88%;
+  --input: 33 22% 88%;
+  --ring: 20 39% 21%;
+  
+  --radius: 0.25rem;
+
+  --button-outline: rgba(44, 24, 16, 0.1);
+  --badge-outline: rgba(44, 24, 16, 0.05);
+  --opaque-button-border-intensity: -8;
+  --elevate-1: rgba(44, 24, 16, 0.03);
+  --elevate-2: rgba(44, 24, 16, 0.08);
+}
+
+.dark {
+  --background: 18 46% 12%;
+  --foreground: 40 20% 97%;
+  
+  --card: 20 39% 15%;
+  --card-foreground: 40 20% 97%;
+  --card-border: 20 39% 25%;
+  
+  --popover: 20 39% 15%;
+  --popover-foreground: 40 20% 97%;
+  --popover-border: 20 39% 25%;
+  
+  --primary: 43 65% 53%;
+  --primary-foreground: 18 46% 12%;
+  
+  --secondary: 20 39% 25%;
+  --secondary-foreground: 40 20% 97%;
+  
+  --muted: 20 39% 25%;
+  --muted-foreground: 40 20% 70%;
+  
+  --accent: 20 39% 25%;
+  --accent-foreground: 43 65% 53%;
+  
+  --destructive: 0 62% 30%;
+  --destructive-foreground: 40 20% 97%;
+  
+  --border: 20 39% 25%;
+  --input: 20 39% 25%;
+  --ring: 43 65% 53%;
+
+  --button-outline: rgba(250, 249, 246, 0.1);
+  --badge-outline: rgba(250, 249, 246, 0.05);
+  --opaque-button-border-intensity: 9;
+  --elevate-1: rgba(250, 249, 246, 0.04);
+  --elevate-2: rgba(250, 249, 246, 0.09);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
