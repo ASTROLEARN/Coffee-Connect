@@ -1,11 +1,13 @@
 import { Link } from "wouter";
-import { Coffee, ShoppingBag, Menu as MenuIcon } from "lucide-react";
+import { Coffee, ShoppingBag, Menu as MenuIcon, LogOut, User } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export function Navbar() {
   const { itemCount } = useCart();
+  const { user, logout } = useAuth();
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -37,6 +39,23 @@ export function Navbar() {
               </span>
             )}
           </Link>
+
+          {/* User info + logout */}
+          <div className="flex items-center gap-3 pl-4 border-l border-border/60">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <User className="h-4 w-4" />
+              <span className="max-w-[120px] truncate font-medium text-foreground">{user?.name}</span>
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={logout}
+              className="text-muted-foreground hover:text-destructive hover:bg-destructive/10 gap-1.5"
+            >
+              <LogOut className="h-4 w-4" />
+              <span>Logout</span>
+            </Button>
+          </div>
         </div>
 
         {/* Mobile Nav */}
@@ -58,11 +77,30 @@ export function Navbar() {
             </SheetTrigger>
             <SheetContent side="right" className="bg-background w-[300px] border-l border-border">
               <div className="flex flex-col gap-8 mt-12">
+                {/* User greeting */}
+                <div className="flex items-center gap-2 pb-4 border-b border-border">
+                  <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center">
+                    <User className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-sm text-foreground">{user?.name}</p>
+                    <p className="text-xs text-muted-foreground">{user?.email}</p>
+                  </div>
+                </div>
+
                 <Link href="/" className="text-xl font-serif font-bold text-foreground">Home</Link>
                 <Link href="/menu" className="text-xl font-serif font-bold text-foreground">Our Menu</Link>
                 <Link href="/orders" className="text-xl font-serif font-bold text-foreground">Order History</Link>
                 <Link href="/contact" className="text-xl font-serif font-bold text-foreground">Contact</Link>
                 <Link href="/cart" className="text-xl font-serif font-bold text-foreground">Cart ({itemCount})</Link>
+
+                <button
+                  onClick={logout}
+                  className="flex items-center gap-2 text-destructive font-medium text-sm mt-auto"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Logout
+                </button>
               </div>
             </SheetContent>
           </Sheet>
