@@ -1,5 +1,5 @@
 {
-  "installCommand": "cd coffee-shop && npm install --legacy-peer-deps --force",
+  "installCommand": "cd coffee-shop && npm ci",
   "buildCommand": "cd coffee-shop && npm run build",
   "outputDirectory": "coffee-shop/dist",
   "rewrites": [
