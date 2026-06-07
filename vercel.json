@@ -1,0 +1,8 @@
+{
+  "installCommand": "cd coffee-shop && npm install",
+  "buildCommand": "cd coffee-shop && npm run build",
+  "outputDirectory": "coffee-shop/dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
