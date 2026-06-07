@@ -22,7 +22,7 @@ export interface Order {
   customerName: string;
   customerEmail: string | null;
   notes: string | null;
-  status: "pending" | "confirmed" | "delivered";
+  status: "pending" | "preparing" | "ready" | "delivered";
   total: number;
   createdAt: string;
   items: OrderItem[];
@@ -249,6 +249,23 @@ interface CreateOrderInput {
   customerEmail?: string | null;
   notes?: string | null;
   items: Array<{ menuItemId: number; quantity: number }>;
+}
+
+export function useUpdateOrderStatus() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ id, status }: { id: number; status: Order["status"] }) => {
+      const orders = getStoredOrders();
+      const idx = orders.findIndex((o) => o.id === id);
+      if (idx === -1) throw new Error("Order not found");
+      orders[idx] = { ...orders[idx], status };
+      saveOrders(orders);
+      return orders[idx];
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
+    },
+  });
 }
 
 export function useCreateOrder() {

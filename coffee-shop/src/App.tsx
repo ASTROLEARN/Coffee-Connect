@@ -1,4 +1,4 @@
-import { Switch, Route, Router as WouterRouter, Redirect, useLocation } from "wouter";
+import { Switch, Route, Router as WouterRouter, Redirect } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,6 +14,7 @@ import Cart from "@/pages/cart";
 import Orders from "@/pages/orders";
 import OrderConfirmation from "@/pages/order-confirmation";
 import Contact from "@/pages/contact";
+import Admin from "@/pages/admin";
 import Login from "@/pages/login";
 import Register from "@/pages/register";
 import NotFound from "@/pages/not-found";
@@ -21,35 +22,46 @@ import NotFound from "@/pages/not-found";
 const queryClient = new QueryClient();
 
 function ProtectedRoute({ component: Component }: { component: React.ComponentType }) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   if (!isAuthenticated) return <Redirect to="/login" />;
+  if (user?.isAdmin) return <Redirect to="/admin" />;
+  return <Component />;
+}
+
+function AdminRoute({ component: Component }: { component: React.ComponentType }) {
+  const { isAuthenticated, user } = useAuth();
+  if (!isAuthenticated) return <Redirect to="/login" />;
+  if (!user?.isAdmin) return <Redirect to="/" />;
   return <Component />;
 }
 
 function Router() {
-  const { isAuthenticated } = useAuth();
-  const [location] = useLocation();
-  const isAuthPage = location === "/login" || location === "/register";
+  const { isAuthenticated, user } = useAuth();
 
   return (
     <Switch>
       <Route path="/login">
-        {isAuthenticated ? <Redirect to="/" /> : <Login />}
+        {isAuthenticated
+          ? user?.isAdmin ? <Redirect to="/admin" /> : <Redirect to="/" />
+          : <Login />}
       </Route>
       <Route path="/register">
-        {isAuthenticated ? <Redirect to="/" /> : <Register />}
+        {isAuthenticated
+          ? user?.isAdmin ? <Redirect to="/admin" /> : <Redirect to="/" />
+          : <Register />}
       </Route>
       <Route>
         <div className="flex flex-col min-h-screen">
           <Navbar />
           <main className="flex-1">
             <Switch>
-              <Route path="/" component={() => <ProtectedRoute component={Home} />} />
-              <Route path="/menu" component={() => <ProtectedRoute component={Menu} />} />
-              <Route path="/cart" component={() => <ProtectedRoute component={Cart} />} />
-              <Route path="/orders" component={() => <ProtectedRoute component={Orders} />} />
-              <Route path="/order-confirmation/:id" component={() => <ProtectedRoute component={OrderConfirmation} />} />
-              <Route path="/contact" component={() => <ProtectedRoute component={Contact} />} />
+              <Route path="/"                        component={() => <ProtectedRoute component={Home} />} />
+              <Route path="/menu"                    component={() => <ProtectedRoute component={Menu} />} />
+              <Route path="/cart"                    component={() => <ProtectedRoute component={Cart} />} />
+              <Route path="/orders"                  component={() => <ProtectedRoute component={Orders} />} />
+              <Route path="/order-confirmation/:id"  component={() => <ProtectedRoute component={OrderConfirmation} />} />
+              <Route path="/contact"                 component={() => <ProtectedRoute component={Contact} />} />
+              <Route path="/admin"                   component={() => <AdminRoute component={Admin} />} />
               <Route component={NotFound} />
             </Switch>
           </main>
